@@ -5,8 +5,9 @@ import { SearchIcon } from './search-icon';
 export const PrimaryInput = styled.input`
 	width: 352px;
 	border-radius: 8px;
-	padding: 10px 16px;
 	border: none;
+	padding: 10px 16px;
+
 	background-color: var(--bg-secondary);
 
 	font-family: inherit;
@@ -28,12 +29,18 @@ const InputContainer = styled.div`
 	}
 `;
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+	value: string;
+	handleChange: (value: string) => void;
+}
 
 export function PrimaryInputWSearchIcon(props: InputProps) {
 	return (
 		<InputContainer>
-			<PrimaryInput {...props} />
+			<PrimaryInput
+				onChange={(event) => props.handleChange(event.target.value)}
+				{...props}
+			/>
 			<SearchIcon />
 		</InputContainer>
 	);

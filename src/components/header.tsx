@@ -1,5 +1,6 @@
 'use client';
 
+import { useFilter } from '@/hooks/useFilter';
 import { Saira_Stencil_One } from 'next/font/google';
 import { styled } from 'styled-components';
 import { CartControl } from './cart-control';
@@ -14,8 +15,8 @@ interface HeaderProps {}
 
 const TagHeader = styled.header`
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 	padding: 20px 160px;
 
 	> div {
@@ -29,16 +30,22 @@ const TagHeader = styled.header`
 const Logo = styled.a`
 	color: var(--logo-color);
 	font-weight: 400;
-	font-size: 45px;
+	font-size: 40px;
 	line-height: 150%;
 `;
 
 export function Header(props: HeaderProps) {
+	const { setSearch, search } = useFilter();
+
 	return (
 		<TagHeader>
 			<Logo className={sairaStencil.className}>E-Commerce</Logo>
 			<div>
-				<PrimaryInputWSearchIcon placeholder="Procurando por algo específico?" />
+				<PrimaryInputWSearchIcon
+					value={search}
+					handleChange={setSearch}
+					placeholder="Procurando por algo específico?"
+				/>
 				<CartControl />
 			</div>
 		</TagHeader>
